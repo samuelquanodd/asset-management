@@ -1,0 +1,33 @@
+const mongoose = require('mongoose');
+const { faker } = require('@faker-js/faker');
+const Asset = require('../models/assetModel');
+
+const generateAssets = (count = 100) => {
+    const categories = ["Electronics", "Clothes", "Medicine", "Furniture", "Vehicles", "Sports"];
+    const manufacturers = ["Dell", "HP", "Apple", "Samsung", "Nike", "Adidas", "Sony", "Lenovo", "Ford", "Toyota"];
+
+    return Array.from({ length: count }, (_, id) => {
+        const category = faker.helpers.arrayElement(categories);
+        const manufacturer = faker.helpers.arrayElement(manufacturers);
+        return {
+            name: faker.commerce.productName(),
+            manufacturer: manufacturer,
+            category: category,
+            tags: [manufacturer, category],
+        };
+    });
+};
+
+const seedAssets = async (count = 100) => {
+    try {
+        await Asset.deleteMany();
+        const assets = generateAssets(count);
+        await Asset.insertMany(assets);
+
+        console.log(`${count} assets added successfully!`);
+    } catch (err) {
+        console.error('Error seeding assets:', err);
+    }
+};
+
+module.exports = seedAssets;
