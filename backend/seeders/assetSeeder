@@ -4,7 +4,7 @@ const Asset = require('../models/assetModel');
 
 const generateAssets = (count = 100) => {
     const categories = ["Electronics", "Clothes", "Medicine", "Furniture", "Vehicles", "Sports"];
-    const manufacturers = ["Dell", "HP", "Apple", "Samsung", "Nike", "Adidas", "Sony", "Lenovo", "Ford", "Toyota"];
+    const manufacturers = ["Dell", "HP", "Apple", "Samsung", "Nike", "Adidas", "Sony", "Lenovo", "Ford", "Toyota", "Huawei"];
 
     return Array.from({ length: count }, (_, id) => {
         const category = faker.helpers.arrayElement(categories);
